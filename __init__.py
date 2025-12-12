@@ -35,6 +35,22 @@ def mongraphique():
 @app.route("/histogramme/")
 def tawarano_graph():
     return render_template("histogramme.html")
+
+@app.route("/commits/")
+def commits_graph():
+    url = "https://api.github.com/repos/OpenRSI/5MCSI_Metriques/commits"
+    response = urlopen(url)
+    data = json.loads(response.read().decode("utf-8"))
+    
+    # Extraction des minutes de chaque commit
+    minutes_list = []
+    for commit_entry in data:
+        date_string = commit_entry.get("commit", {}).get("author", {}).get("date")
+        if date_string:
+            date_object = datetime.strptime(date_string, '%Y-%m-%dT%H:%M:%SZ')
+            minutes_list.append(date_object.minute)
+    
+    return render_template("commits.html", minutes_list=minutes_list)
   
 if __name__ == "__main__":
   app.run(debug=True)
