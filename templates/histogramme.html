@@ -4,28 +4,32 @@
     <script type="text/javascript">
       google.charts.load("current", {packages:["corechart"]});
       google.charts.setOnLoadCallback(drawChart);
+
       function drawChart() {
         var data = google.visualization.arrayToDataTable([
-          ['Jour', 'Température'],
+          ['Jour', 'Température °C'],
           ['30/01/2017', 10.61],
           ['31/01/2017', 9.15],
           ['01/02/2017', 11.02],
           ['02/02/2017', 8.82],
-          ['03/02/2017', 10.93]]);
+          ['03/02/2017', 10.93]
+        ]);
 
-        
-          
         var options = {
-          title: 'Lengths of dinosaurs, in meters',
-          legend: { position: 'none' },
+          title: 'Températures Tawarano (Histogramme)',
+          legend: { position: 'none' }
         };
 
-        var chart = new google.visualization.Histogram(document.getElementById('chart_div'));
+        var chart = new google.visualization.Histogram(
+          document.getElementById('chart_div')
+        );
         chart.draw(data, options);
       }
     </script>
   </head>
+
   <body>
+    <h2>Histogramme des températures</h2>
     <div id="chart_div" style="width: 900px; height: 500px;"></div>
   </body>
 </html>
