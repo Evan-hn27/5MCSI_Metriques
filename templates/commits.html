@@ -11,12 +11,14 @@
       function drawChart() {
         var minutes = {{ minutes_list | safe }};
         
-        // Transformer en tableau pour Google Charts
-        var dataArray = [['Minute', 'Nombre de commits']];
+        // Compter le nombre de commits par minute
         var counts = {};
         minutes.forEach(function(min) {
           counts[min] = (counts[min] || 0) + 1;
         });
+
+        // Transformer en tableau pour Google Charts
+        var dataArray = [['Minute', 'Nombre de commits']];
         for (var min in counts) {
           dataArray.push([parseInt(min), counts[min]]);
         }
@@ -30,13 +32,15 @@
           legend: 'none'
         };
 
-        var chart = new google.visualization.ColumnChart(document.getElementById('chart_div'));
+        var chart = new google.visualization.ColumnChart(
+          document.getElementById('chart_div')
+        );
         chart.draw(data, options);
       }
     </script>
 </head>
 <body>
-    <h2>Graphique des commits (minute par minute)</h2>
+    <h2>Graphique des commits (18 commits entre 8h40 et 10h50)</h2>
     <div id="chart_div" style="width: 900px; height: 500px;"></div>
 </body>
 </html>
