@@ -35,7 +35,7 @@ Vous observerez que nous utilisons une API gratuite fourni par Openweathermap. C
 <p>Ce qui nous intéresse à présent, c'est extraire la valeur de [dt] (c'est à dire les dates) et les valeurs stockées dans la clé [main][temp], c'est à dire les températures du jour.</p>
 <p>A noter que les dates ici sont au format "Timestamp". C'est à dire que la donnée est le nombre de secondes depuis le 1 janvier 2000 (un légacy d'UNIX). Les températures sont stockées au format Kelvin (il faudra donc les convertir en °C).</p> 
 <p>Vous allez à présent créer une nouvelle route "/tawarano/" dans votre application Python pour filtrer l'API d'Openweathermap et extraire uniquement les dates et température du jour. Ci-dessous la route à ajouter dans votre application.
-<pre><code><xmp>
+<pre><code>
 @app.route('/tawarano/')
 def meteo():
     response = urlopen('https://samples.openweathermap.org/data/2.5/forecast?lat=0&lon=0&appid=xxx')
@@ -47,7 +47,7 @@ def meteo():
         temp_day_value = list_element.get('main', {}).get('temp') - 273.15 # Conversion de Kelvin en °c 
         results.append({'Jour': dt_value, 'temp': temp_day_value})
     return jsonify(results=results)
-</xmp></code></pre></p>
+</code></pre></p>
 <p>Testez cette nouvelle route dans votre navigateur et observer le résultat.</p>    
 <p>- - - - - </p>
 <b>Exercice 3 Bis : Les fichiers HTML</b>
@@ -57,7 +57,7 @@ Depuis GitHUB, nous allons donc créer et déposer dans le répertoire "template
 </p>
 <p>Etape 1.1 : Création du fichier graphique.html
 Dans votre répertoire templates, créez un fichier graphique.html contenant le code suivant :
-<pre><code><xmp>
+<pre><code>
 <html>
   <head>
     <meta charset="UTF-8" />
@@ -67,15 +67,15 @@ Dans votre répertoire templates, créez un fichier graphique.html contenant le 
     <h2>Mon Graphique</h2>
 </body>
 </html>
-</xmp></code></pre></p>
+</code></pre></p>
 <p>Etape 1.2 : Création d'une nouvelle route
 Créez à présent une nouvelle route afin de pouvoir consulter votre fichier HTML depuis votre site en ligne.
 Pour cela, ajouter le code ci-dessous dans votre fichier __init__.py :
-<pre><code><xmp>
+<pre><code>
 @app.route("/rapport/")
 def mongraphique():
     return render_template("graphique.html")
-</xmp></code></pre></p>
+</code></pre></p>
 <p>Notions acquises dans cet exercice : Nous avons vu lors de cet exercice comment créer et où déposer les fichiers HTML lorsque l'on utise le Framework Flask.
 Nous avons également découvert que les Framework (cadre de travail) nous imposent une structure de travail où chaque élément doit être à sa place.
 </p>
@@ -85,7 +85,7 @@ Nous avons également découvert que les Framework (cadre de travail) nous impos
 Pour cela, nous devons utiliser les données de notre nouvelle API /rapport/ et les injecter dans notre fichier graphique.html.
 Nous allons utiliser une bibliothèque open source fournie par Google pour créer ce graphique.</p>
 <p>Modifier votre précédent fichier graphique.html dans GitHUB et remplacer son code par celui-ci :
-<pre><code><xmp>
+<pre><code>
 <html>
   <head>
     <meta charset="UTF-8" />
@@ -126,7 +126,7 @@ Nous allons utiliser une bibliothèque open source fournie par Google pour crée
     </script>
   </body>
 </html>
-</xmp></code></pre></p>
+</code></pre></p>
 <p>Notions acquises lors de cette séquence : Bravo ! Vous avez à présent en main tous les outils qui vous permettront de créer vos propres tableaux de bord.
 Vous avez appris à récupérer des données issues d'une API externe (des données issues d'un serveur externe), les adapter à vos besoins et afin créer vos propres graphiques.</p>
 <p>- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - </p>
